@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+		xmlns:tools="http://schemas.android.com/tools"
+		xmlns:app="http://schemas.android.com/apk/res-auto"
+		xmlns:android="http://schemas.android.com/apk/res/android">
+	<data>
+		<variable
+				name="item"
+				type="com.example.pocapplication.models.RowsItem"/>
+	</data>
+
+	<RelativeLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:background="@drawable/list_item_bg"
+			android:padding="8dp">
+
+		<TextView
+				android:id="@+id/tv_itemTitle"
+				android:textColor="@color/list_item_title"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:text='@{item.title != null ? item.title : "NA"}'
+				tools:text="sdvbash wajhwgdawsgdw  eiu suh dkjahs kj"/>
+
+		<ImageView
+				android:id="@+id/iv_itemArrow"
+				android:layout_centerVertical="true"
+				android:layout_alignParentEnd="true"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:src="@drawable/ic_chevron_right_black_24dp"/>
+
+		<ImageView
+				android:id="@+id/iv_itemImage"
+				android:layout_marginTop="8dp"
+				android:layout_below="@id/tv_itemTitle"
+				android:layout_toStartOf="@id/iv_itemArrow"
+				app:imageUrl="@{item.imageHref}"
+				android:layout_width="@dimen/list_item_image_width"
+				android:layout_height="@dimen/list_item_image_height"/>
+
+		<TextView
+				android:id="@+id/tv_itemDescription"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_below="@id/tv_itemTitle"
+				android:textColor="@color/list_item_description"
+				android:layout_toStartOf="@id/iv_itemImage"
+				android:text='@{item.description != null ? item.description : "NA"}'
+				tools:text="sjdhakj shdkj skjd kasj dkjahs da dohaskj dhkajsh dkjas dhaksjhd"
+				android:layout_marginTop="8dp"/>
+	</RelativeLayout>
+</layout>
