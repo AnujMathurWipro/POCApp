@@ -12,8 +12,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.pocapplication.R
 import com.example.pocapplication.databinding.FragmentMainBinding
 import com.example.pocapplication.adapter.MainScreenListAdapter
+import com.example.pocapplication.models.MainScreenResult
 import com.example.pocapplication.viewmodel.MainScreenViewModel
-import com.example.pocapplication.models.RowsItem
 import com.example.pocapplication.ui.MainActivity
 
 class MainScreenFragment : Fragment() {
@@ -28,17 +28,14 @@ class MainScreenFragment : Fragment() {
     }
 
     private fun observeFields() {
-        viewModel.getResponseList().observe(this, Observer<List<RowsItem?>> {
-            (binding.rvItemList.adapter as MainScreenListAdapter).setListItems(it)
-        })
-
-        viewModel.getResponseTitle().observe(this, Observer<String> {
-            (activity as MainActivity).setScreenTitle(it)
-        })
-
-        viewModel.getResponseError().observe(this, Observer<String> {
+        viewModel.getResult().observe(this, Observer<MainScreenResult> {
+            if(viewModel.isSuccessful(it)) {
+                (binding.rvItemList.adapter as MainScreenListAdapter).setListItems(it.response?.rows)
+                (activity as MainActivity).setScreenTitle(it.response?.title)
+            } else {
+                setErrorMessage(it.errorMessage ?: "")
+            }
             binding.srlSwipeRefresh.isRefreshing = false
-            setErrorMessage(it)
         })
     }
 

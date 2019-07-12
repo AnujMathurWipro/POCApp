@@ -1,54 +1,46 @@
 package com.example.pocapplication.viewmodel
 
 import android.content.Context
+import android.net.ConnectivityManager
+import android.net.NetworkInfo
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.pocapplication.models.MainScreenResult
+import com.example.pocapplication.models.Response
 import com.example.pocapplication.repository.Repository
-import com.example.pocapplication.models.RowsItem
-import com.example.pocapplication.service.MainScreenService
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.launch
 
-class MainScreenViewModel() : ViewModel() {
+class MainScreenViewModel : ViewModel() {
 
-    private var responseList = MutableLiveData<List<RowsItem?>>()
-    private var responseTitle = MutableLiveData<String>()
-    private var responseError = MutableLiveData<String>()
-    private val service = MainScreenService()
+    private var result = MutableLiveData<MainScreenResult>()
 
-    fun getResponseList(): LiveData<List<RowsItem?>> {
-        return responseList
+    fun getResult(): LiveData<MainScreenResult> {
+        return result
     }
 
-    fun getResponseTitle(): LiveData<String> {
-        return responseTitle
-    }
-
-    fun getResponseError(): LiveData<String> {
-        return responseError
-    }
-
-    private var job: Job? = null
     fun getResponse() {
-        job = CoroutineScope(Dispatchers.IO).launch {
-            val response = Repository().getList()
-            var message = service.getErrorMessage(response.isSuccessful)
-            if(message.isEmpty()) {
-                val res = response.body()
-                if(service.isSuccessful(res)) {
-                    responseList.postValue(res?.rows)
-                    responseTitle.postValue(res?.title)
-                } else {
-                    message = "Unable to connect"
-                }
-            }
-            responseError.postValue(message)
+        Repository().getMainScreenList({ getErrorMessage(it) }, { isSuccessful(it) }, result)
+    }
+
+    fun isNetworkAvailable(context: Context?): Boolean {
+        val cm = context?.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager?
+        val activeNetwork: NetworkInfo? = cm?.activeNetworkInfo
+        return activeNetwork?.isConnected == true
+    }
+
+    fun getErrorMessage(isSuccessful: Boolean): String {
+        return if (isSuccessful) {
+            ""
+        } else {
+            "There was some problem with the request. Please try again."
         }
     }
-    fun isNetworkAvailable(context: Context?): Boolean {
-        return service.isNetworkAvailable(context)
+
+    fun isSuccessful(res: Response?): Boolean {
+        return res?.rows != null && res.rows.isNotEmpty()
+    }
+
+    fun isSuccessful(it: MainScreenResult?): Boolean {
+        return isSuccessful(it?.response)
     }
 }
