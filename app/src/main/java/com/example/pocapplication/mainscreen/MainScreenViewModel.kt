@@ -6,13 +6,14 @@ import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import com.example.pocapplication.models.RowsItem
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
-class MainScreenViewModel(app: Application) : AndroidViewModel(app) {
+class MainScreenViewModel() : ViewModel() {
 
     private var responseList = MutableLiveData<List<RowsItem?>>()
     private var responseTitle = MutableLiveData<String>()
