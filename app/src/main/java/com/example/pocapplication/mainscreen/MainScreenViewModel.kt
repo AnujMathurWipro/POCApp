@@ -52,9 +52,4 @@ class MainScreenViewModel() : ViewModel() {
     fun isNetworkAvailable(context: Context?): Boolean {
         return service.isNetworkAvailable(context)
     }
-
-    fun cancelJob() {
-        if(job != null)
-            job?.cancel()
-    }
 }

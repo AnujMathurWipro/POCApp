@@ -65,11 +65,6 @@ class MainFragment : Fragment() {
             setErrorMessage("It seems like internet is not available. Please connect and try again.")
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        viewModel?.cancelJob()
-    }
-
     companion object{
         fun newInstance(args: Bundle?): MainFragment {
             val instance = MainFragment()
