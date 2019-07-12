@@ -1,4 +1,4 @@
-package com.example.pocapplication.mainscreen
+package com.example.pocapplication.ui.fragment
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,10 +9,12 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.pocapplication.MainActivity
 import com.example.pocapplication.R
 import com.example.pocapplication.databinding.FragmentMainBinding
+import com.example.pocapplication.adapter.MainScreenListAdapter
+import com.example.pocapplication.viewmodel.MainScreenViewModel
 import com.example.pocapplication.models.RowsItem
+import com.example.pocapplication.ui.MainActivity
 
 class MainFragment : Fragment() {
 

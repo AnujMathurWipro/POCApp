@@ -1,10 +1,11 @@
-package com.example.pocapplication
+package com.example.pocapplication.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.databinding.DataBindingUtil
+import com.example.pocapplication.R
 import com.example.pocapplication.databinding.ActivityMainBinding
-import com.example.pocapplication.mainscreen.MainFragment
+import com.example.pocapplication.ui.fragment.MainFragment
 
 class MainActivity : AppCompatActivity() {
 

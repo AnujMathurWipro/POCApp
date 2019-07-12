@@ -1,13 +1,12 @@
-package com.example.pocapplication.mainscreen
+package com.example.pocapplication.viewmodel
 
-import android.app.Application
 import android.content.Context
-import android.util.Log
-import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.pocapplication.repository.Repository
 import com.example.pocapplication.models.RowsItem
+import com.example.pocapplication.service.Service
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job

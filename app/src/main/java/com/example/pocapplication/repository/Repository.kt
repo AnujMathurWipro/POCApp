@@ -1,8 +1,7 @@
-package com.example.pocapplication.mainscreen
+package com.example.pocapplication.repository
 
+import com.example.pocapplication.mainscreen.FetchListService
 import com.example.pocapplication.models.Response
-import retrofit2.Call
-import retrofit2.Callback
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 

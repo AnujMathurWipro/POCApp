@@ -1,4 +1,4 @@
-package com.example.pocapplication.mainscreen
+package com.example.pocapplication.service
 
 import android.content.Context
 import android.net.ConnectivityManager

@@ -1,12 +1,11 @@
 package com.example.pocapplication
 
-import com.example.pocapplication.mainscreen.Service
+import com.example.pocapplication.service.Service
 import com.example.pocapplication.models.Response
 import com.example.pocapplication.models.RowsItem
 import org.junit.Test
 
 import org.junit.Assert.*
-import org.mockito.Mock
 import org.mockito.Mockito
 
 /**

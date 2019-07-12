@@ -1,4 +1,4 @@
-package com.example.pocapplication.mainscreen
+package com.example.pocapplication.adapter
 
 import android.content.Context
 import android.view.LayoutInflater
