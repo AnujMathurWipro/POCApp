@@ -16,7 +16,7 @@ import com.example.pocapplication.viewmodel.MainScreenViewModel
 import com.example.pocapplication.models.RowsItem
 import com.example.pocapplication.ui.MainActivity
 
-class MainFragment : Fragment() {
+class MainScreenFragment : Fragment() {
 
     private lateinit var binding: FragmentMainBinding
     private lateinit var viewModel: MainScreenViewModel
@@ -68,8 +68,8 @@ class MainFragment : Fragment() {
     }
 
     companion object{
-        fun newInstance(args: Bundle?): MainFragment {
-            val instance = MainFragment()
+        fun newInstance(args: Bundle?): MainScreenFragment {
+            val instance = MainScreenFragment()
             if(args != null)
                 instance.arguments = args
             return instance

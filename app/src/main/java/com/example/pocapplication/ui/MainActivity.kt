@@ -5,7 +5,7 @@ import android.os.Bundle
 import androidx.databinding.DataBindingUtil
 import com.example.pocapplication.R
 import com.example.pocapplication.databinding.ActivityMainBinding
-import com.example.pocapplication.ui.fragment.MainFragment
+import com.example.pocapplication.ui.fragment.MainScreenFragment
 
 class MainActivity : AppCompatActivity() {
 
@@ -18,15 +18,15 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun addMainFragment() {
-        val frag = MainFragment.newInstance(null)
+        val frag = MainScreenFragment.newInstance(null)
         addFragment(frag, binding?.flFragmentContainer?.id)
     }
 
-    private fun addFragment(frag: MainFragment, id: Int?) {
+    private fun addFragment(frag: MainScreenFragment, id: Int?) {
         addFragment(frag, id, false)
     }
 
-    private fun addFragment(frag: MainFragment, id: Int?, addToBackStack: Boolean) {
+    private fun addFragment(frag: MainScreenFragment, id: Int?, addToBackStack: Boolean) {
         val fragTransaction = supportFragmentManager.beginTransaction()
         fragTransaction.replace(id ?: 0, frag, frag.javaClass.simpleName)
         if(addToBackStack)

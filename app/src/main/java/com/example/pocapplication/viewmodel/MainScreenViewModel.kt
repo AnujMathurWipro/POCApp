@@ -6,7 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.pocapplication.repository.Repository
 import com.example.pocapplication.models.RowsItem
-import com.example.pocapplication.service.Service
+import com.example.pocapplication.service.MainScreenService
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -17,7 +17,7 @@ class MainScreenViewModel() : ViewModel() {
     private var responseList = MutableLiveData<List<RowsItem?>>()
     private var responseTitle = MutableLiveData<String>()
     private var responseError = MutableLiveData<String>()
-    private val service = Service()
+    private val service = MainScreenService()
 
     fun getResponseList(): LiveData<List<RowsItem?>> {
         return responseList

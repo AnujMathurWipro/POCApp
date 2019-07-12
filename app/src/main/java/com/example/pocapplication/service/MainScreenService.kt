@@ -5,7 +5,7 @@ import android.net.ConnectivityManager
 import android.net.NetworkInfo
 import com.example.pocapplication.models.Response
 
-open class Service {
+open class MainScreenService {
     fun isNetworkAvailable(context: Context?): Boolean {
         val cm = context?.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager?
         val activeNetwork: NetworkInfo? = cm?.activeNetworkInfo

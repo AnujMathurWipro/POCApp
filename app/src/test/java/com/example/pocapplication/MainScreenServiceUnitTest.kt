@@ -1,6 +1,6 @@
 package com.example.pocapplication
 
-import com.example.pocapplication.service.Service
+import com.example.pocapplication.service.MainScreenService
 import com.example.pocapplication.models.Response
 import com.example.pocapplication.models.RowsItem
 import org.junit.Test
@@ -13,21 +13,21 @@ import org.mockito.Mockito
  *
  * See [testing documentation](http://d.android.com/tools/testing).
  */
-class ServiceUnitTest {
+class MainScreenServiceUnitTest {
     @Test
     fun testGetErrorMessage_NoError() {
-        val service = Mockito.spy(Service::class.java)
+        val service = Mockito.spy(MainScreenService::class.java)
         assertEquals("", service.getErrorMessage(true))
     }
     @Test
     fun testGetErrorMessage_Error() {
-        val service = Mockito.spy(Service::class.java)
+        val service = Mockito.spy(MainScreenService::class.java)
         assertEquals("There was some problem with the request. Please try again.", service.getErrorMessage(false))
     }
 
     @Test
     fun testIsSuccessfulResponse_NoError() {
-        val service = Mockito.spy(Service::class.java)
+        val service = Mockito.spy(MainScreenService::class.java)
         val response = Mockito.mock(Response::class.java)
         val responseList = ArrayList<RowsItem>()
         responseList.add(RowsItem("", "", ""))
@@ -38,7 +38,7 @@ class ServiceUnitTest {
 
     @Test
     fun testIsSuccessfulResponse_Error() {
-        val service = Mockito.spy(Service::class.java)
+        val service = Mockito.spy(MainScreenService::class.java)
         val response = Mockito.mock(Response::class.java)
         val responseList: ArrayList<RowsItem>? = null
         Mockito.`when`(response.rows).thenReturn(responseList)
