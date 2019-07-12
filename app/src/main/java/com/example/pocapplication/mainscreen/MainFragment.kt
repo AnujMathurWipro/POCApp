@@ -16,8 +16,8 @@ import com.example.pocapplication.models.RowsItem
 
 class MainFragment : Fragment() {
 
-    private var binding: FragmentMainBinding? = null
-    private var viewModel: MainScreenViewModel?= null
+    private lateinit var binding: FragmentMainBinding
+    private lateinit var viewModel: MainScreenViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,41 +26,41 @@ class MainFragment : Fragment() {
     }
 
     private fun observeFields() {
-        viewModel?.getResponseList()?.observe(this, Observer<List<RowsItem?>> {
-            (binding?.rvItemList?.adapter as MainScreenListAdapter?)?.setListItems(it)
+        viewModel.getResponseList().observe(this, Observer<List<RowsItem?>> {
+            (binding.rvItemList.adapter as MainScreenListAdapter).setListItems(it)
         })
 
-        viewModel?.getResponseTitle()?.observe(this, Observer<String> {
+        viewModel.getResponseTitle().observe(this, Observer<String> {
             (activity as MainActivity).setScreenTitle(it)
         })
 
-        viewModel?.getResponseError()?.observe(this, Observer<String> {
-            binding?.srlSwipeRefresh?.isRefreshing = false
+        viewModel.getResponseError().observe(this, Observer<String> {
+            binding.srlSwipeRefresh.isRefreshing = false
             setErrorMessage(it)
         })
     }
 
     private fun setErrorMessage(message: String) {
-        binding?.tvErrorText?.text = message
+        binding.tvErrorText.text = message
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_main, container, false)
-        return binding?.root
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         getResponseFromServer()
-        binding?.srlSwipeRefresh?.setOnRefreshListener { getResponseFromServer() }
-        binding?.rvItemList?.layoutManager = LinearLayoutManager(activity)
-        binding?.rvItemList?.adapter = MainScreenListAdapter(activity, null)
+        binding.srlSwipeRefresh.setOnRefreshListener { getResponseFromServer() }
+        binding.rvItemList.layoutManager = LinearLayoutManager(activity)
+        binding.rvItemList.adapter = MainScreenListAdapter(activity, null)
     }
 
     private fun getResponseFromServer() {
-        if(viewModel?.isNetworkAvailable(activity) == true) {
-            binding?.srlSwipeRefresh?.isRefreshing = true
-            viewModel?.getResponse()
+        if(viewModel.isNetworkAvailable(activity)) {
+            binding.srlSwipeRefresh.isRefreshing = true
+            viewModel.getResponse()
         } else
             setErrorMessage("It seems like internet is not available. Please connect and try again.")
     }
