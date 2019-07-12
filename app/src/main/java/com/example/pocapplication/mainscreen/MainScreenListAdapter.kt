@@ -2,6 +2,7 @@ package com.example.pocapplication.mainscreen
 
 import android.content.Context
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -34,3 +35,5 @@ class MainScreenListAdapter(context: Context?, private var list: List<RowsItem?>
     }
 
 }
+
+class ViewHolder(view: View) : RecyclerView.ViewHolder(view)
