@@ -6,20 +6,21 @@ import android.net.NetworkInfo
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.pocapplication.models.MainScreenResult
+import com.example.pocapplication.models.BaseResult
 import com.example.pocapplication.models.Response
 import com.example.pocapplication.repository.Repository
 
 class MainScreenViewModel : ViewModel() {
 
-    private var result = MutableLiveData<MainScreenResult>()
+    private var result = MutableLiveData<BaseResult<Response>>()
 
-    fun getResult(): LiveData<MainScreenResult> {
+    fun getResult(): LiveData<BaseResult<Response>> {
         return result
     }
 
-    fun getResponse() {
-        Repository().getMainScreenList({ getErrorMessage(it) }, { isSuccessful(it) }, result)
+    fun getResponse(force: Boolean) {
+        if(force || result.value == null)
+            Repository().getMainScreenList({ getErrorMessage(it) }, { isSuccessful(it) }, result)
     }
 
     fun isNetworkAvailable(context: Context?): Boolean {
@@ -40,7 +41,7 @@ class MainScreenViewModel : ViewModel() {
         return res?.rows != null && res.rows.isNotEmpty()
     }
 
-    fun isSuccessful(it: MainScreenResult?): Boolean {
+    fun isSuccessful(it: BaseResult<Response>?): Boolean {
         return isSuccessful(it?.response)
     }
 }

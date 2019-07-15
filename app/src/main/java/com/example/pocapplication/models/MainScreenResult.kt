@@ -1,6 +1,6 @@
 package com.example.pocapplication.models
 
-class MainScreenResult {
+class BaseResult<T> {
     var errorMessage: String? =  null
-    var response: Response? = null
+    var response: T? = null
 }

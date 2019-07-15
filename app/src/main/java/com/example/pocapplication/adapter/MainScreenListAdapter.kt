@@ -10,7 +10,7 @@ import com.example.pocapplication.R
 import com.example.pocapplication.databinding.ItemListBinding
 import com.example.pocapplication.models.RowsItem
 
-class MainScreenListAdapter(context: Context?, private var list: List<RowsItem?>?) : RecyclerView.Adapter<ViewHolder>() {
+class MainScreenListAdapter(context: Context, private var list: List<RowsItem?>?) : RecyclerView.Adapter<ViewHolder>() {
 
     private val inflater: LayoutInflater = LayoutInflater.from(context)
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
