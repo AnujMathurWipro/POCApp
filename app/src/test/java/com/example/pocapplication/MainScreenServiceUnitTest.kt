@@ -15,14 +15,9 @@ import org.mockito.Mockito
  */
 class MainScreenServiceUnitTest {
     @Test
-    fun testGetErrorMessage_NoError() {
-        val service = Mockito.spy(MainScreenViewModel::class.java)
-        assertEquals("", service.getErrorMessage(true))
-    }
-    @Test
     fun testGetErrorMessage_Error() {
         val service = Mockito.spy(MainScreenViewModel::class.java)
-        assertEquals("There was some problem with the request. Please try again.", service.getErrorMessage(false))
+        assertEquals("There was some problem with the request. Please try again.", service.getErrorMessage())
     }
 
     @Test

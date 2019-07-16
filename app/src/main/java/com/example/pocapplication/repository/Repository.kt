@@ -14,47 +14,34 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class Repository {
 
-    fun getMainScreenList(
-        errorMessage: (success: Boolean) -> String,
-        isSuccessful: (res: Response?) -> Boolean,
-        liveData: MutableLiveData<BaseResult<Response>>
+    fun getMainScreenList(liveData: MutableLiveData<BaseResult<Response>>
     ) {
         val retrofit = createRetrofit("https://dl.dropboxusercontent.com")
         val service = retrofit.create(FetchListService::class.java)
         val call = service.list
-        getResponseFromServer(call, errorMessage, isSuccessful, liveData)
+        getResponseFromServer(call, liveData)
     }
 
     private fun <T> getResponseFromServer(
         call: Call<T>,
-        errorMessage: (success: Boolean) -> String,
-        successful: (res: T?) -> Boolean,
         liveData: MutableLiveData<BaseResult<T>>
     ) {
         CoroutineScope(Dispatchers.IO).launch {
 
-            handleResponse(call.execute(), errorMessage, successful, liveData)
+            handleResponse(call.execute(), liveData)
         }
     }
 
     private fun <T> handleResponse(
         result: retrofit2.Response<T>,
-        errorMessage: (success: Boolean) -> String,
-        successful: (res: T?) -> Boolean,
         liveData: MutableLiveData<BaseResult<T>>
     ) {
 
-        var message = errorMessage(result.isSuccessful)
         val value = BaseResult<T>()
-        if (message.isEmpty()) {
+        if (result.isSuccessful) {
             val res = result.body()
-            if (successful(res)) {
                 value.response = res
-            } else {
-                message = "Unable to connect"
-            }
         }
-        value.errorMessage = message
         liveData.postValue(value)
     }
 

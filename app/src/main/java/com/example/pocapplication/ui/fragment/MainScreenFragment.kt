@@ -16,6 +16,7 @@ import com.example.pocapplication.models.BaseResult
 import com.example.pocapplication.models.Response
 import com.example.pocapplication.viewmodel.MainScreenViewModel
 import com.example.pocapplication.ui.MainActivity
+import com.example.pocapplication.util.Utility
 
 class MainScreenFragment : Fragment() {
 
@@ -30,11 +31,11 @@ class MainScreenFragment : Fragment() {
 
     private fun observeFields() {
         viewModel.getResult().observe(this, Observer<BaseResult<Response>> {
-            if(viewModel.isSuccessful(it)) {
+            if(viewModel.isSuccessful(it.response)) {
                 (binding.rvItemList.adapter as MainScreenListAdapter).setListItems(it.response?.rows)
                 (activity as MainActivity).setScreenTitle(it.response?.title)
             } else {
-                setErrorMessage(it.errorMessage ?: "")
+                setErrorMessage(viewModel.getErrorMessage())
             }
             binding.srlSwipeRefresh.isRefreshing = false
         })
@@ -60,7 +61,7 @@ class MainScreenFragment : Fragment() {
     }
 
     private fun getResponseFromServer(force: Boolean) {
-        if(viewModel.isNetworkAvailable(activity)) {
+        if(Utility.isNetworkAvailable(activity)) {
             binding.srlSwipeRefresh.isRefreshing = true
             viewModel.getResponse(force)
         } else
